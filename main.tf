@@ -24,8 +24,8 @@ locals {
 #   }
 
 #   provisioner "file" {
-#     source      = "${path.module}/../helpers/install-rke2-cp.sh"
-#     destination = "/tmp/install-rke2-cp.sh"
+#     source      = "${path.module}/../helpers/install-k3s-cp.sh"
+#     destination = "/tmp/install-k3s-cp.sh"
 
 #     connection {
 #       type        = "ssh"
@@ -71,12 +71,12 @@ users:
 ssh_pwauth: True
 runcmd:
   - [ bash, -c, 'echo "Cloud-init start: $(TZ=":America/Vancouver" date "+%Y-%m-%d %H:%M:%S.%N %Z")" >> /root/cloud-init-run.log' ]
-  - [ bash, -c, 'start_time=$(TZ=":America/Vancouver" date "+%Y-%m-%d %H:%M:%S.%N %Z"); echo "Running Wget - install-rke2-cp.sh: $start_time" >> /root/cloud-init-run.log' ]
-  - [ bash, -c, 'wget -P /tmp https://raw.githubusercontent.com/bashfulrobot/libvirt-module-helpers/main/install-rke2-cp.sh >> /root/cloud-init-run.log 2>&1' ]
+  - [ bash, -c, 'start_time=$(TZ=":America/Vancouver" date "+%Y-%m-%d %H:%M:%S.%N %Z"); echo "Running Wget - install-k3s-cp.sh: $start_time" >> /root/cloud-init-run.log' ]
+  - [ bash, -c, 'wget -P /tmp https://raw.githubusercontent.com/bashfulrobot/libvirt-module-helpers/main/install-k3s-cp.sh >> /root/cloud-init-run.log 2>&1' ]
   - [ bash, -c, 'start_time=$(TZ=":America/Vancouver" date "+%Y-%m-%d %H:%M:%S.%N %Z"); echo "Running Wget - serve: $start_time" >> /root/cloud-init-run.log' ]
   - [ bash, -c, 'wget -P /tmp https://raw.githubusercontent.com/bashfulrobot/libvirt-module-helpers/main/serve >> /root/cloud-init-run.log 2>&1' ]
-  - [ bash, -c, 'chmod +x /tmp/serve /tmp/install-rke2-cp.sh >> /root/cloud-init-run.log 2>&1' ]
-  - [ bash, -c, '/tmp/install-rke2-cp.sh >> /root/cloud-init-run.log 2>&1' ]
+  - [ bash, -c, 'chmod +x /tmp/serve /tmp/install-k3s-cp.sh >> /root/cloud-init-run.log 2>&1' ]
+  - [ bash, -c, '/tmp/install-k3s-cp.sh >> /root/cloud-init-run.log 2>&1' ]
   - [ bash, -c, 'echo "Cloud-init end: $(TZ=":America/Vancouver" date "+%Y-%m-%d %H:%M:%S.%N %Z")" >> /root/cloud-init-run.log' ]
 EOF
 }
